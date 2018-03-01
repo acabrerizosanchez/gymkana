@@ -46,6 +46,12 @@ public class Film {
 	public Film() {
 	}
 
+	
+	public Film(long id) {
+		super();
+		this.id = id;
+	}
+
 	public Film(long id, String title, String date, String[] genres) {
 		super();
 		this.id = id;
