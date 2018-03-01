@@ -36,6 +36,7 @@ public class Rating {
 
 	public Rating() {
 	}
+	
 
 	public Rating(long id, User user_Id, Film film_Id, int score) {
 		super();

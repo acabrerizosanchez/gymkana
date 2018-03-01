@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.CreationTimestamp;
 
 /**
  * 
@@ -34,7 +33,6 @@ public class User {
 	private String lastName;
 	
 	@Column
-	@CreationTimestamp
 	private Date birthDate;
 
 	@OneToMany(mappedBy="user_Id", fetch= FetchType.EAGER)	
@@ -55,6 +53,15 @@ public class User {
 
 
 	public User() {
+	}
+	
+	
+
+
+
+	public User(long id) {
+		super();
+		this.id = id;
 	}
 
 
