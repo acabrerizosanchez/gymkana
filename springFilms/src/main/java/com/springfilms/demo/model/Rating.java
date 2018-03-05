@@ -11,36 +11,41 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Rating {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@ManyToOne
-	@JoinColumn(name="user_id", updatable=false)
-	private User rated_user;
+	@JoinColumn(name = "user", updatable = false)
+	private User user;
 
 	@ManyToOne
-	@JoinColumn(name="post_id", updatable=false)
-	private Film rated_film;
+	@JoinColumn(name = "film", updatable = false)
+	private Film film;
 
 	@Column
-	@CreationTimestamp
-	private Date fecha;
-	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date date;
+
+	// @NotNull
+	// @NotBlank
+	// @Min(1)
+	// @Max(5)
 	@Column
-	private int rate;
+	private int score;
+
+	public Rating() {
+		super();
+	}
 
 	public Rating(int rate) {
 		super();
-		this.rate = rate;
+		this.score = rate;
 	}
 
 	public long getId() {
@@ -51,44 +56,41 @@ public class Rating {
 		this.id = id;
 	}
 
-	public User getRated_user() {
-		return rated_user;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setRated_user(User rated_user) {
-		this.rated_user = rated_user;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public Film getRated_film() {
-		return rated_film;
+	public int getScore() {
+		return score;
 	}
 
-	public void setRated_film(Film rated_film) {
-		this.rated_film = rated_film;
+	public void setScore(int score) {
+		this.score = score;
 	}
 
-	public Date getFecha() {
-		return fecha;
+	public User getUser() {
+		return user;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public int getRate() {
-		return rate;
+	public Film getFilm() {
+		return film;
 	}
 
-	public void setRate(int rate) {
-		this.rate = rate;
+	public void setFilm(Film film) {
+		this.film = film;
 	}
 
 	@Override
 	public String toString() {
-		return "Rating [id=" + id + ", rated_user=" + rated_user + ", rated_film=" + rated_film + ", fecha=" + fecha
-				+ ", rate=" + rate + "]";
+		return "Rating [id=" + id + ", user=" + user + ", film=" + film + ", date=" + date + ", score=" + score + "]";
 	}
-
-	
 
 }

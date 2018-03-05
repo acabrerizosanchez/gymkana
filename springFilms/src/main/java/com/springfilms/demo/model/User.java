@@ -8,10 +8,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /*
  * ENTIDAD USUARIO
@@ -20,52 +21,59 @@ import org.hibernate.annotations.GenericGenerator;
 public class User {
 
 	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-	@Column(name = "nombre")
-	private String nombre;
+	@Column(name = "name")
+	private String name;
 
+	@Column(name = "surname")
+	private String surname;
+
+	@Temporal(TemporalType.DATE)
 	@Column
-	private String apellido;
+	private Date birthDate;
 
-	@Column
-	private Date fechaNacimiento;
-
-	@OneToMany(mappedBy = "rated_user", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<Rating> ratingsSet = new HashSet<>();
 
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public User() {
+		super();
 	}
 
-	public String getNombre() {
-		return nombre;
+	public User(String nombre, String apellido, Date fechaNacimiento) {
+		super();
+		this.name = nombre;
+		this.surname = apellido;
+		this.birthDate = fechaNacimiento;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public String getName() {
+		return name;
 	}
 
-	public String getApellido() {
-		return apellido;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public String getSurname() {
+		return surname;
 	}
 
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public Set<Rating> getRatingsSet() {
@@ -76,17 +84,15 @@ public class User {
 		this.ratingsSet = ratingsSet;
 	}
 
-	public User(String nombre, String apellido, Date fechaNacimiento) {
-		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.fechaNacimiento = fechaNacimiento;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
-				+ fechaNacimiento + ", ratingsSet=" + ratingsSet + "]";
+		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate + "]";
 	}
+
+	
 
 }
