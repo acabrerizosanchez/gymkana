@@ -5,6 +5,15 @@ import static com.springfilms.demo.utils.MyConstants.*;
 import static com.springfilms.demo.utils.ValidationMethods.*;
 import com.springfilms.demo.beans.RatingBean;
 
+/**
+ * Valida que los campos de los ratings introducidos por json sean correctos
+ * 
+ * Validaciones: Campos no nulos y no vacios,userId es numero positivo, filmId
+ * es numero positivo, score entre 1 y 5, formato de fecha correcto "yyyy-MM-dd"
+ * 
+ * @author acosanchez
+ *
+ */
 public class RatingValidator {
 
 	private static final Logger logger = Logger.getLogger(RatingValidator.class);

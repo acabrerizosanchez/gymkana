@@ -17,6 +17,13 @@ import com.springfilms.demo.model.User;
 import com.springfilms.demo.utils.UserValidator;
 import com.springfilms.demo.beans.UserBean;
 
+/**
+ * Controlador del endpoint /new_user Valida y almacena usuarios en la bbdd de
+ * la aplicacion, provenientes de un Json a través de POST
+ * 
+ * @author acosanchez
+ *
+ */
 @RestController
 public class UserController {
 
@@ -24,7 +31,7 @@ public class UserController {
 	@Autowired
 	private UserDaoImpl userdaoimpl;
 
-	@RequestMapping(value = "/new_user", method = RequestMethod.POST)
+	@RequestMapping(value = "/usuario_nuevo", method = RequestMethod.POST)
 	public ResponseEntity<UserBean> create(@RequestBody UserBean userbean) {
 
 		try {
@@ -38,7 +45,7 @@ public class UserController {
 
 					User tempUser = new User();
 
-					tempUser.setBirthDate(stringDateToDateFormat(userbean.getBirthDate()));
+					tempUser.setBirthDate(stringDateToDateFormat(userbean.getBirthDate(), DATE_USER_AND_RATING_FORMAT));
 					tempUser.setName(userbean.getName());
 					tempUser.setSurname(userbean.getSurname());
 					userdaoimpl.create(tempUser);

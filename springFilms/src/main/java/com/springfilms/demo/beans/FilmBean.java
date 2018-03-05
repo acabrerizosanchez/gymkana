@@ -2,6 +2,13 @@ package com.springfilms.demo.beans;
 
 import java.util.Arrays;
 
+/**
+ * Bean utilizado como enlace entre el Json de entrada y la capa de persistencia.
+ * Utilizado para la validacion de los campos
+ * 
+ * @author acosanchez
+ *
+ */
 public class FilmBean {
 
 	private String title;

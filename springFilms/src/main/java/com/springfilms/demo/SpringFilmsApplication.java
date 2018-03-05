@@ -5,7 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-
+/**
+ * StartClass of the App
+ * @author acosanchez
+ *
+ */
 @SpringBootApplication
 public class SpringFilmsApplication extends SpringBootServletInitializer {
 

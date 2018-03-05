@@ -16,6 +16,13 @@ public final class ValidationMethods {
 		throw new IllegalStateException("Utility class");
 	}
 
+	/**
+	 * 
+	 * Comrpueba que el string existe y no es nulo
+	 * 
+	 * @param str
+	 * @return true if valid
+	 */
 	public static boolean stringIsBlankOrNull(String str) {
 		try {
 			if (!((str == null) || (str.equals(""))))
@@ -28,6 +35,14 @@ public final class ValidationMethods {
 		return true;
 	}
 
+	/**
+	 * 
+	 * Comprueba si el formato de fecha (String) es valido segun el formato elegido
+	 * 
+	 * @param inDate
+	 * @param format
+	 * @return true if valid
+	 */
 	public static boolean dateFormatIsValid(String inDate, String format) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format);
 		dateFormat.setLenient(false);
@@ -42,10 +57,42 @@ public final class ValidationMethods {
 		return true;
 	}
 
+	/**
+	 * 
+	 * Comprueba si el formato de fecha de FilmBean es válido
+	 * 
+	 * @param inDate
+	 * @return true if valid
+	 */
+	public static boolean filmDateFormatIsValid(String inDate) {
+
+		try {
+
+			int anio = Integer.parseInt(inDate);
+			if ((anio > MIN_FILM_YEAR) && (anio <= MAX_FILM_YEAR))
+				return true;
+		} catch (Exception e) {
+			logger.error("Error parseando el año de la pelicula", e);
+			return false;
+		}
+
+		return false;
+
+	}
+
+	/**
+	 * Comprueba: Generos introducidos están entre MIN_GENRES y MAX_GENRES Generos
+	 * existen y no blancos Generos con un maximo de caracteres:
+	 * MAX_LENGHT_STRINGS_JSON
+	 * 
+	 * @param genres
+	 *            String[] con los generos
+	 * @return String con la informacion del error
+	 */
 	public static String genresAreValid(String[] genres) {
 
 		try {
-			if (genres.length <= 0 || genres.length > 3)
+			if (genres.length < MIN_GENRES && genres.length > MAX_GENRES)
 				return INVALID_NUMBER_GENRES;
 
 			else {
@@ -64,6 +111,12 @@ public final class ValidationMethods {
 		return NO_ERROR_STRING;
 	}
 
+	/**
+	 * Comprueba que str es parseable a numero y que es positivo
+	 * 
+	 * @param str
+	 * @return true if valid
+	 */
 	public static boolean userIdOrFilmIdAreValid(String str) {
 
 		try {
@@ -78,6 +131,13 @@ public final class ValidationMethods {
 
 	}
 
+	/**
+	 * Comprueba que score es parseable a numero y que su valor comprende entre los
+	 * valores MIN_SCORE y MAX_SCORE
+	 * 
+	 * @param str
+	 * @return true if valid
+	 */
 	public static boolean scoreIsValid(String str) {
 
 		try {
@@ -92,9 +152,20 @@ public final class ValidationMethods {
 		return false;
 	}
 
-	/*
+	/**
+	 * Comprueba que los arguementos que enviamos a través del controlador
+	 * BestAndWorstController son los correctos:
+	 * 
+	 * Coprueba:
+	 * 
+	 * - Que sean 3 argumentos - START_DATE y END_DATE sean del formato correcto
+	 * ("yyyy-MM-dd") - REPORT sea hot o cold
+	 * 
 	 * QUEDA VALIDAR QUE LOS ARGUMENTOS DE ENTRADA SON ?report&startDate&endDate Por
 	 * ahora lo que veo es leer el requestParams.getSetKeys y validarla
+	 * 
+	 * @param requestParams
+	 * @return
 	 */
 
 	public static boolean paramsAreValid(Map<String, String> requestParams) {

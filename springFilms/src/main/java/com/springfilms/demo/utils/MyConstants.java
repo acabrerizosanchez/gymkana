@@ -24,6 +24,10 @@ public final class MyConstants {
 	public static final int MAX_LENGHT_STRINGS_JSON = 30;
 	public static final int MAX_SCORE = 5;
 	public static final int MIN_SCORE = 1;
+	public static final int MIN_GENRES = 1;
+	public static final int MAX_GENRES = 3;
+	public static final int MIN_FILM_YEAR = 1900;
+	public static final int MAX_FILM_YEAR = 2018;
 
 	/*
 	 * ERROR MESSAGES

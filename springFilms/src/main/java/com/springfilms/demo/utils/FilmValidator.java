@@ -6,6 +6,18 @@ import static com.springfilms.demo.utils.ValidationMethods.*;
 
 import com.springfilms.demo.beans.FilmBean;
 
+/**
+ * Valida que los campos de las peliculas introducidas por json sean correctos
+ * 
+ * Validaciones: campos vacios,campos nulos,titulo max 30 char, fecha en formato
+ * "yyyy",genero max 30char, 3 generos por pelicula, campo 'isAdult" sea true o
+ * false.
+ * 
+ * 
+ * 
+ * @author acosanchez
+ *
+ */
 public class FilmValidator {
 
 	private static final Logger logger = Logger.getLogger(FilmValidator.class);
@@ -19,8 +31,8 @@ public class FilmValidator {
 			if (filmbean.getTitle().length() > MAX_LENGHT_STRINGS_JSON)
 				return NAME_FIELD_TOO_LONG;
 
-			if (!dateFormatIsValid(filmbean.getDate(), DATE_FILM_FORMAT))
-				return NO_ERROR_STRING;
+			if (!filmDateFormatIsValid(filmbean.getDate()))
+				return INVALID_DATE_FORMAT;
 
 			if (!(genresAreValid(filmbean.getGenres()).equals(NO_ERROR_STRING)))
 				return genresAreValid(filmbean.getGenres());

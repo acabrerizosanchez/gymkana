@@ -15,6 +15,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * Configuracion de la capa de persistencia de la app
+ * @author acosanchez
+ *
+ */
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfig {

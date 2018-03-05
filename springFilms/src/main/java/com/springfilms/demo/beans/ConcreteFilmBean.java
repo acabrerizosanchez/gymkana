@@ -1,5 +1,13 @@
 package com.springfilms.demo.beans;
 
+/**
+ * Bean utilizado como entidad de respuesta en el controlador
+ * BestAndWorstController
+ *
+ * 
+ * @author acosanchez
+ *
+ */
 public class ConcreteFilmBean {
 
 	private String title;

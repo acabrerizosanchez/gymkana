@@ -11,7 +11,7 @@ import com.springfilms.demo.beans.UserBean;
  * Valida el json de entrada para la insercion de usuarios
  * 1.Campos no nulos y no vacios
  * 2.name & surname maximo "MAX_LENGHT_STRING_JSON" caracteres 
- * 3.Formato de fecha
+ * 3.Formato de fecha "yyyy-MM-dd"
  * Devuelve String con informacion del error
  */
 public class UserValidator {

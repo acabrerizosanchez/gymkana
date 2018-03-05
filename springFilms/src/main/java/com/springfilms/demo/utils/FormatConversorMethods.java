@@ -1,7 +1,5 @@
 package com.springfilms.demo.utils;
 
-import static com.springfilms.demo.utils.MyConstants.DATE_USER_AND_RATING_FORMAT;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,10 +15,19 @@ public final class FormatConversorMethods {
 		throw new IllegalStateException("Utility class");
 	}
 
-	public static Date stringDateToDateFormat(String dateString) {
+	/**
+	 * Convierte String into Date format.
+	 * 
+	 * @param dateString
+	 *            String para parsear
+	 * @param dateFormat
+	 *            Formato deseado
+	 * @return
+	 */
+	public static Date stringDateToDateFormat(String dateString, String dateFormat) {
 
 		try {
-			DateFormat formatter = new SimpleDateFormat(DATE_USER_AND_RATING_FORMAT);
+			DateFormat formatter = new SimpleDateFormat(dateFormat);
 			return formatter.parse(dateString);
 
 		} catch (ParseException e) {

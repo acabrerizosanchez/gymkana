@@ -1,6 +1,7 @@
 package com.springfilms.demo.controller;
 
 import static com.springfilms.demo.utils.FormatConversorMethods.*;
+import static com.springfilms.demo.utils.MyConstants.*;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,14 @@ import com.springfilms.demo.dao.FilmDaoImpl;
 import com.springfilms.demo.model.Film;
 import com.springfilms.demo.utils.FilmValidator;
 
+/**
+ * Controlador del endpoint /new_rating Valida y almacena films en la bbdd de la
+ * aplicacion, provenientes de un Json a través de POST
+ * 
+ * @author acosanchez
+ *
+ */
+
 @RestController
 public class FilmController {
 
@@ -26,7 +35,7 @@ public class FilmController {
 	@Autowired
 	private FilmDaoImpl filmdaoimpl;
 
-	@RequestMapping(value = "/new_film", method = RequestMethod.POST)
+	@RequestMapping(value = "/pelicula_nueva", method = RequestMethod.POST)
 	public ResponseEntity<FilmBean> create(@RequestBody FilmBean filmbean) {
 
 		if (filmbean != null) {
@@ -41,7 +50,7 @@ public class FilmController {
 
 				tempFilm.setTitle(filmbean.getTitle());
 				tempFilm.setGenres(filmbean.getGenres());
-				tempFilm.setDate(stringDateToDateFormat(filmbean.getDate()));
+				tempFilm.setDate(stringDateToDateFormat(filmbean.getDate(), DATE_FILM_FORMAT));
 
 				try {
 					if (((filmbean.getIsAdult()) != null)) {

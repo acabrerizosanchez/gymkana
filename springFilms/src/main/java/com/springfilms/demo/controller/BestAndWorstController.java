@@ -18,6 +18,22 @@ import com.springfilms.demo.beans.ConcreteFilmBean;
 import com.springfilms.demo.dao.FilmDaoImpl;
 import com.springfilms.demo.dao.RatingDaoImpl;
 
+/**
+ * Controlador del endPoint "/show_stats" Tipo Request: GET + 3 params. Response: Json
+ * response with the info.
+ * 
+ * Ejemplo de uso: http://.../show_stats?report=cold&startDate=2017-01-07&endDate=2021-01-07
+ * 
+ * @param report
+ *            2 valores posible. hot: Pelicula mejor valorada en un rango de
+ *            fecha cold: Pelicula peor valorada en un rango de fecha
+ * @param startDate
+ *            fecha de inicio para la comparacion.// Ejemplo
+ * @param endDate
+ *            fecha final para la comparacion
+ * @author acosanchez
+ *
+ */
 @RestController
 public class BestAndWorstController {
 
@@ -29,7 +45,7 @@ public class BestAndWorstController {
 	@Autowired
 	private RatingDaoImpl ratingdao;
 
-	@RequestMapping(value = "/show_stats", method = RequestMethod.GET)
+	@RequestMapping(value = "/filtermovie", method = RequestMethod.GET)
 	public ResponseEntity<ConcreteFilmBean> showBestAndWorst(@RequestParam Map<String, String> requestParams) {
 
 		if (!paramsAreValid(requestParams)) {

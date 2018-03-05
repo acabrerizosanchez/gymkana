@@ -20,6 +20,14 @@ import com.springfilms.demo.dao.UserDaoImpl;
 import com.springfilms.demo.model.Rating;
 import com.springfilms.demo.utils.RatingValidator;
 
+/**
+ * Controlador del endpoint /new_rating Valida y almacena ratings en la bbdd de
+ * la aplicacion, provenientes de un Json a través POST
+ * 
+ * @author acosanchez
+ *
+ */
+
 @RestController
 public class RatingController {
 
@@ -34,7 +42,7 @@ public class RatingController {
 	@Autowired
 	private FilmDaoImpl filmdaoimpl;
 
-	@RequestMapping(value = "/new_rating", method = RequestMethod.POST)
+	@RequestMapping(value = "/rating_nuevo", method = RequestMethod.POST)
 	public ResponseEntity<RatingBean> create(@RequestBody RatingBean ratingbean) {
 
 		try {
@@ -51,7 +59,7 @@ public class RatingController {
 					ratingTemp.setUser(userdaoimpl.getById(Long.parseLong(ratingbean.getUserId())));
 					ratingTemp.setFilm(filmdaoimpl.getById(Long.parseLong(ratingbean.getMovieId())));
 					ratingTemp.setScore(Integer.parseInt(ratingbean.getScore()));
-					ratingTemp.setDate(stringDateToDateFormat(ratingbean.getDate()));
+					ratingTemp.setDate(stringDateToDateFormat(ratingbean.getDate(), DATE_USER_AND_RATING_FORMAT));
 
 					ratingdaoimpl.create(ratingTemp);
 					return new ResponseEntity<>(ratingbean, HttpStatus.OK);
