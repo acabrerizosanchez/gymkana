@@ -1,5 +1,6 @@
 package com.springfilms.demo.model;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,67 +9,73 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Film {
 
 	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
 	@Column(name = "titulo")
-	private String titulo;
+	private String title;
 
 	@Column
-	private String Genero;
+	private String[] genres;
 
 	@Column
-	private Date añoLanzamiento;
+	@Temporal(TemporalType.DATE)
+	private Date date;
 
-	
-	@OneToMany(mappedBy = "rated_film", fetch = FetchType.EAGER)
+	@Column
+	private boolean isAdult;
+
+	@OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
 	private Set<Rating> ratingsSet = new HashSet<>();
 
-	
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public Film(String titulo, String genero, Date añoLanzamiento) {
+	public Film() {
 		super();
-		this.titulo = titulo;
-		Genero = genero;
-		this.añoLanzamiento = añoLanzamiento;
 	}
 
-	
-	public String getTitulo() {
-		return titulo;
+	public String[] getGenres() {
+		return genres;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setGenres(String[] genres) {
+		this.genres = genres;
 	}
 
-	public String getGenero() {
-		return Genero;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setGenero(String genero) {
-		Genero = genero;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public Date getAñoLanzamiento() {
-		return añoLanzamiento;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setAñoLanzamiento(Date añoLanzamiento) {
-		this.añoLanzamiento = añoLanzamiento;
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public boolean isAdult() {
+		return isAdult;
+	}
+
+	public void setAdult(boolean isAdult) {
+		this.isAdult = isAdult;
 	}
 
 	public Set<Rating> getRatingsSet() {
@@ -79,17 +86,14 @@ public class Film {
 		this.ratingsSet = ratingsSet;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", titulo=" + titulo + ", Genero=" + Genero + ", añoLanzamiento=" + añoLanzamiento
-				+ ", ratingsSet=" + ratingsSet + "]";
+		return "Film [id=" + id + ", title=" + title + ", genres=" + Arrays.toString(genres) + ", date=" + date
+				+ ", isAdult=" + isAdult + "]";
 	}
-
-	
-	
 
 }

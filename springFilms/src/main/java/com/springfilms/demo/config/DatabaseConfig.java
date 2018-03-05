@@ -27,12 +27,12 @@ public class DatabaseConfig {
 
 	@Bean
 	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(env.getProperty("db.driver"));
-		dataSource.setUrl(env.getProperty("db.url"));
-		dataSource.setUsername(env.getProperty("db.username"));
-		dataSource.setPassword(env.getProperty("db.password"));
-		return dataSource;
+		DriverManagerDataSource myDataSource = new DriverManagerDataSource();
+		myDataSource.setDriverClassName(env.getProperty("db.driver"));
+		myDataSource.setUrl(env.getProperty("db.url"));
+		myDataSource.setUsername(env.getProperty("db.username"));
+		myDataSource.setPassword(env.getProperty("db.password"));
+		return myDataSource;
 	}
 
 	/*
@@ -40,16 +40,16 @@ public class DatabaseConfig {
 	 */
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+		LocalContainerEntityManagerFactoryBean myEntityManagerFactory = new LocalContainerEntityManagerFactoryBean();
 
-		entityManagerFactory.setDataSource(dataSource);
+		myEntityManagerFactory.setDataSource(dataSource);
 
 		// Indicamos la ruta donde tiene que buscar las clases con anotaciones
-		entityManagerFactory.setPackagesToScan(env.getProperty("entityManager.packagesToScan"));
+		myEntityManagerFactory.setPackagesToScan(env.getProperty("entityManager.packagesToScan"));
 
 		// Unimos JPA con Hibernate
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+		myEntityManagerFactory.setJpaVendorAdapter(vendorAdapter);
 
 		// Propiedades de Hibernate
 		Properties additionalProperties = new Properties();
@@ -58,9 +58,9 @@ public class DatabaseConfig {
 		additionalProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 
 		additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-		entityManagerFactory.setJpaProperties(additionalProperties);
+		myEntityManagerFactory.setJpaProperties(additionalProperties);
 
-		return entityManagerFactory;
+		return myEntityManagerFactory;
 	}
 
 	/*
