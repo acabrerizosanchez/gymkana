@@ -1,16 +1,8 @@
-package com.proyecto.AppFilms.model;
+package com.proyecto.AppFilms.bean;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -19,56 +11,30 @@ import org.hibernate.validator.constraints.NotBlank;
  * 
  * @author jmcaceres
  *
- *         Clase User que guarda a los usuarios.
+ *	Clase para validar la fecha
  */
-@Entity
-public class User {
+public class UserBean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column(name = "name")
 	@NotNull
 	@NotBlank
 	private String name;
 
-	@Column(name = "surname")
 	@NotNull
 	@NotBlank
 	private String surname;
 
-	@Column
 	@NotNull
-	private Date birthDate;
+	private String birthDate;
 
 	private String errorMessage;
 
-	@OneToMany(mappedBy = "userId", fetch = FetchType.EAGER)
-	private Set<Rating> rating = new HashSet<>();
-
-	public Set<Rating> getRating() {
-		return rating;
-	}
-
-	public void setRating(Set<Rating> rating) {
-		this.rating = rating;
-	}
-
-	public User() {
-	}
-
-	public User(long id) {
+	public UserBean() {
 		super();
-		this.id = id;
-	}
 
-	public User(long id, String name, String surname, Date birthDate) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.birthDate = birthDate;
 	}
 
 	public long getId() {
@@ -95,11 +61,11 @@ public class User {
 		this.surname = surname;
 	}
 
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -109,6 +75,12 @@ public class User {
 
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
+	}
+
+	@Override
+	public String toString() {
+		return "UserBean [id=" + id + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate
+				+ ", errorMessage=" + errorMessage + "]";
 	}
 
 }

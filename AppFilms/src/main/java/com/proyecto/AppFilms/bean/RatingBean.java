@@ -1,9 +1,5 @@
-package com.proyecto.AppFilms.model;
+package com.proyecto.AppFilms.bean;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,14 +9,16 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
+import com.proyecto.AppFilms.model.Film;
+import com.proyecto.AppFilms.model.User;
+
 /**
  * 
  * @author jmcaceres
  *
- *         Clase Rating que son las puntuaciones de las peliculas.
+ *	Clase para poder validar la fecha
  */
-@Entity
-public class Rating {
+public class RatingBean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,26 +34,17 @@ public class Rating {
 	@JoinColumn(name = "movieId", updatable = false)
 	private Film movieId;
 
-	@Column
 	@NotNull
 	@Range(min = 1, max = 5, message = "El valor de la puntuacion debe ser entre 1 y 5")
 	private int score;
 
-	@Column
 	@NotNull
-	private Date date;
+	private String date;
 
 	private String errorMessage;
 
-	public Rating() {
-	}
-
-	public Rating(long id, User userId, Film movieId, int score) {
+	public RatingBean() {
 		super();
-		this.id = id;
-		this.userId = userId;
-		this.movieId = movieId;
-		this.score = score;
 	}
 
 	public long getId() {
@@ -90,6 +79,14 @@ public class Rating {
 		this.score = score;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	public String getErrorMessage() {
 		return errorMessage;
 	}
@@ -98,12 +95,10 @@ public class Rating {
 		this.errorMessage = errorMessage;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
+	@Override
+	public String toString() {
+		return "RatingBean [id=" + id + ", userId=" + userId + ", movieId=" + movieId + ", score=" + score + ", date="
+				+ date + ", errorMessage=" + errorMessage + "]";
 	}
 
 }
