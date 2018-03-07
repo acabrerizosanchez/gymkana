@@ -1,4 +1,4 @@
-package com.proyecto.AppFilms.model;
+package com.proyecto.appfilms.model;
 
 import java.util.Date;
 
@@ -9,9 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Range;
 
 /**
  * 
@@ -28,21 +25,16 @@ public class Rating {
 
 	@ManyToOne
 	@JoinColumn(name = "userId", updatable = false)
-	@NotNull
 	private User userId;
 
 	@ManyToOne
-	@NotNull
 	@JoinColumn(name = "movieId", updatable = false)
 	private Film movieId;
 
 	@Column
-	@NotNull
-	@Range(min = 1, max = 5, message = "El valor de la puntuacion debe ser entre 1 y 5")
 	private int score;
 
 	@Column
-	@NotNull
 	private Date date;
 
 	private String errorMessage;
@@ -56,6 +48,16 @@ public class Rating {
 		this.userId = userId;
 		this.movieId = movieId;
 		this.score = score;
+	}
+
+	public Rating(long id, User userId, Film movieId, int score, Date date, String errorMessage) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.movieId = movieId;
+		this.score = score;
+		this.date = date;
+		this.errorMessage = errorMessage;
 	}
 
 	public long getId() {

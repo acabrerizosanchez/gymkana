@@ -1,39 +1,46 @@
-package com.proyecto.AppFilms.bean;
+package com.proyecto.appfilms.bean;
 
 import java.util.Arrays;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
-
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 
  * @author jmcaceres
  *
- *	Clase para poder validar la fecha
+ *         Clase para poder validar la fecha
  */
 public class FilmBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@NotNull
+	@NotEmpty
 	private String title;
 
-	@NotNull
-
+	@NotEmpty
 	private String date;
 
-	@NotNull
-
+	@NotEmpty
 	private String[] genres;
 
 	private String isAdult;
 
 	private String errorMessage;
+
+	public FilmBean(long id, String title, String date, String[] genres, String isAdult, String errorMessage) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.date = date;
+		this.genres = genres;
+		this.isAdult = isAdult;
+		this.errorMessage = errorMessage;
+	}
 
 	public FilmBean() {
 		super();

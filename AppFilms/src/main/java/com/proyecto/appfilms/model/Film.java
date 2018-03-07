@@ -1,4 +1,4 @@
-package com.proyecto.AppFilms.model;
+package com.proyecto.appfilms.model;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -11,9 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * 
@@ -29,16 +26,14 @@ public class Film {
 	private long id;
 
 	@Column(name = "title")
-	@NotNull
-	@NotBlank
 	private String title;
 
 	@Column(name = "date")
-	@NotNull
+
 	private Date date;
 
 	@Column(name = "genres")
-	@NotNull
+
 	private String[] genres;
 
 	@Column(name = "isAdult")
@@ -65,13 +60,21 @@ public class Film {
 		this.id = id;
 	}
 
-	public Film(long id, String title, Date date, String[] genres, String isAdult) {
+	public Film(String title, Date date, String[] genres, String errorMessage) {
 		super();
-		this.id = id;
+		this.title = title;
+		this.date = date;
+		this.genres = genres;
+		this.errorMessage = errorMessage;
+	}
+
+	public Film(String title, Date date, String[] genres, String isAdult, String errorMessage) {
+		super();
 		this.title = title;
 		this.date = date;
 		this.genres = genres;
 		this.isAdult = isAdult;
+		this.errorMessage = errorMessage;
 	}
 
 	public long getId() {
