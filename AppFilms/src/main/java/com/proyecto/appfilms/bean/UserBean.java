@@ -1,17 +1,16 @@
-package com.proyecto.AppFilms.bean;
+package com.proyecto.appfilms.bean;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 
  * @author jmcaceres
  *
- *	Clase para validar la fecha
+ *         Clase para validar la fecha
  */
 public class UserBean {
 
@@ -19,15 +18,13 @@ public class UserBean {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@NotNull
-	@NotBlank
+	@NotEmpty
 	private String name;
 
-	@NotNull
-	@NotBlank
+	@NotEmpty
 	private String surname;
 
-	@NotNull
+	@NotEmpty
 	private String birthDate;
 
 	private String errorMessage;
@@ -35,6 +32,15 @@ public class UserBean {
 	public UserBean() {
 		super();
 
+	}
+
+	public UserBean(long id, String name, String surname, String birthDate, String errorMessage) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.birthDate = birthDate;
+		this.errorMessage = errorMessage;
 	}
 
 	public long getId() {

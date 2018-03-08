@@ -1,4 +1,4 @@
-package com.proyecto.AppFilms.dao;
+package com.proyecto.appfilms.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -6,19 +6,19 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.proyecto.AppFilms.model.Rating;
+import com.proyecto.appfilms.model.User;
 
 @Repository
 @Transactional
-public class RatingDao {
-
+public class UserDao {
+	
 	@PersistenceContext
 	private EntityManager entityManager;
     /*
-     * Almacena la puntuación en la base de datos
+     * Almacena el usuario en la base de datos
      */
-    public void create(Rating rating) {
-    	entityManager.persist(rating);
+    public void create(User usuario) {
+    	entityManager.persist(usuario);
     	return;
     }
 }

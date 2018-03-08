@@ -1,4 +1,4 @@
-package com.proyecto.AppFilms.model;
+package com.proyecto.appfilms.model;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -11,9 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * 
@@ -29,17 +26,12 @@ public class User {
 	private long id;
 
 	@Column(name = "name")
-	@NotNull
-	@NotBlank
 	private String name;
 
 	@Column(name = "surname")
-	@NotNull
-	@NotBlank
 	private String surname;
 
 	@Column
-	@NotNull
 	private Date birthDate;
 
 	private String errorMessage;
@@ -69,6 +61,16 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
+	}
+
+	public User(long id, String name, String surname, Date birthDate, String errorMessage, Set<Rating> rating) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.birthDate = birthDate;
+		this.errorMessage = errorMessage;
+		this.rating = rating;
 	}
 
 	public long getId() {

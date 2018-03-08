@@ -1,22 +1,17 @@
-package com.proyecto.AppFilms.bean;
+package com.proyecto.appfilms.bean;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
-
-import com.proyecto.AppFilms.model.Film;
-import com.proyecto.AppFilms.model.User;
 
 /**
  * 
  * @author jmcaceres
  *
- *	Clase para poder validar la fecha
+ *         Clase para poder validar la fecha
  */
 public class RatingBean {
 
@@ -24,27 +19,33 @@ public class RatingBean {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@ManyToOne
-	@JoinColumn(name = "userId", updatable = false)
-	@NotNull
-	private User userId;
+	@NotEmpty
+	private String userId;
 
-	@ManyToOne
-	@NotNull
-	@JoinColumn(name = "movieId", updatable = false)
-	private Film movieId;
+	@NotEmpty
+	private String movieId;
 
-	@NotNull
-	@Range(min = 1, max = 5, message = "El valor de la puntuacion debe ser entre 1 y 5")
-	private int score;
+	@NotEmpty
+	@Range(min = 1, max = 5)
+	private String score;
 
-	@NotNull
+	@NotEmpty
 	private String date;
 
 	private String errorMessage;
 
 	public RatingBean() {
 		super();
+	}
+
+	public RatingBean(long id, String userId, String movieId, String score, String date, String errorMessage) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.movieId = movieId;
+		this.score = score;
+		this.date = date;
+		this.errorMessage = errorMessage;
 	}
 
 	public long getId() {
@@ -55,27 +56,27 @@ public class RatingBean {
 		this.id = id;
 	}
 
-	public User getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(User userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public Film getMovieId() {
+	public String getMovieId() {
 		return movieId;
 	}
 
-	public void setMovieId(Film movieId) {
+	public void setMovieId(String movieId) {
 		this.movieId = movieId;
 	}
 
-	public int getScore() {
+	public String getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(String score) {
 		this.score = score;
 	}
 

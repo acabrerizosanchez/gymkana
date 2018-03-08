@@ -1,4 +1,4 @@
-package com.proyecto.AppFilms.controller;
+package com.proyecto.appfilms.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proyecto.AppFilms.bean.UserBean;
-import com.proyecto.AppFilms.dao.UserDao;
-import com.proyecto.AppFilms.model.User;
+import com.proyecto.appfilms.bean.UserBean;
+import com.proyecto.appfilms.dao.UserDao;
+import com.proyecto.appfilms.model.User;
 
 /**
  * 
@@ -41,32 +41,32 @@ public class UserController {
 
 		User usuario = new User();
 		/**
-		 * Con el siguiente if nos encargamos de las validaciones mediante las anotaciones en la clase UserBean
-		 * En este if solo controlamos los errores que provienen de las anotaciones
+		 * Con el siguiente if nos encargamos de las validaciones mediante las
+		 * anotaciones en la clase UserBean En este if solo controlamos los errores que
+		 * provienen de las anotaciones
 		 */
 		if (result.hasErrors()) {
 
 			if (userbean.getName() == null || userbean.getName() == "") {
 				userbean.setErrorMessage("El nombre no puede estar vacío ni blanco");
-				return new ResponseEntity<UserBean>(userbean, HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(userbean, HttpStatus.BAD_REQUEST);
 
 			} else if (userbean.getSurname() == null || userbean.getSurname() == "") {
 				userbean.setErrorMessage("El apellido no puede estar vacío ni blanco");
-				return new ResponseEntity<UserBean>(userbean, HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(userbean, HttpStatus.BAD_REQUEST);
 
 			} else if (userbean.getBirthDate() == null || userbean.getBirthDate() == "") {
 				userbean.setErrorMessage("La fecha de nacimiento no puede estar vacío ni blanco");
-				return new ResponseEntity<UserBean>(userbean, HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(userbean, HttpStatus.BAD_REQUEST);
 
 			} else {
 
 				logger.error("No se ha podido crear el usuario");
 				userbean.setErrorMessage("Algo falló");
-				return new ResponseEntity<UserBean>(userbean, HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(userbean, HttpStatus.BAD_REQUEST);
 			}
 		}
-		
-		
+
 		if (userbeanisvalid(userbean)) {
 			usuario.setBirthDate(stringToDateFormat(userbean.getBirthDate(), userbean));
 			usuario.setName(userbean.getName());
@@ -75,10 +75,10 @@ public class UserController {
 
 			userdao.create(usuario);
 
-			return new ResponseEntity<UserBean>(userbean, HttpStatus.OK);
+			return new ResponseEntity(userbean, HttpStatus.OK);
 		} else {
 			userbean.setErrorMessage("Formato de fecha erróneo, el formato correcto es yyyy-MM-dd");
-			return new ResponseEntity<UserBean>(userbean, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity(userbean, HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -92,36 +92,36 @@ public class UserController {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			date = sdf.parse(userbean.getBirthDate());
 			if (!userbean.getBirthDate().equals(sdf.format(date))) {
-				date = null;
+
+				return false;
 			}
 		} catch (java.text.ParseException ex) {
-			ex.printStackTrace();
-		}
-		if (date == null) {
+			logger.error("No es valido el formato de la fecha");
 			return false;
-		} else {
-			return true;
 		}
+
+		return true;
 
 	}
 
 	/**
-	 * Este método transforma el String fecha de UserBean en un Date fecha para poder introducirlo en User
+	 * Este método transforma el String fecha de UserBean en un Date fecha para
+	 * poder introducirlo en User
 	 */
-	public Date stringToDateFormat(String fecha_validada, UserBean userbean) {
+	public Date stringToDateFormat(String fechaValidada, UserBean userbean) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-		Date fecha_date = null;
+		Date fechaDate = null;
 		try {
 
-			fecha_date = sdf.parse(fecha_validada);
+			fechaDate = sdf.parse(fechaValidada);
 
 		} catch (java.text.ParseException e) {
 			userbean.setErrorMessage("fecha incorrecta");
-			e.printStackTrace();
+			logger.error("No es valido el formato de la fecha");
 		}
 
-		return fecha_date;
+		return fechaDate;
 	}
 
 }
