@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Bean;
 import com.openwebinars.springrest.crud.model.Pelicula;
 import com.openwebinars.springrest.crud.repo.PeliculaRepository;
 
+import com.openwebinars.springrest.crud.model.Usuario;
+import com.openwebinars.springrest.crud.repo.UsuarioRepository;
+
 @SpringBootApplication
 public class Application {
 
@@ -49,5 +52,28 @@ public class Application {
 				
 		
 	}
+	
+	/*@Bean
+	CommandLineRunner init(UsuarioRepository usuarioRepository) {
+		
+		String[][] data = {
+				{"Alberto", "alberto"},
+				{"Alvaro", "alvaro"}
+		};
+
+		
+		return (evt) -> Arrays.asList(data)
+				.forEach(a -> {
+				
+					try {
+						usuarioRepository.save(new Usuario(a[0], a[1]));
+					} catch (Exception e) {						
+						e.printStackTrace();
+					}
+					
+				});
+				
+		
+	}*/
 	
 }

@@ -34,47 +34,47 @@ public class PeliculaController {
 		if (result != null)
 			return result;
 		else
-			throw new EmpleadoNotFoundException();
+			throw new PeliculaNotFoundException();
 	}
 
 	@GetMapping("/pelicula/{id}")
-	public Pelicula getEmpleado(@PathVariable Long id) {
+	public Pelicula getPelicula(@PathVariable Long id) {
 		Pelicula result = peliculaRepository.findOne(id);
 		if (result != null)
 			return result;
 		else
-			throw new EmpleadoNotFoundException(id);
+			throw new PeliculaNotFoundException(id);
 	}
 		
-	@PostMapping("/empleado")
-	public ResponseEntity<?> createEmpleado(RequestEntity<Pelicula> reqEmpleado) {
+	@PostMapping("/pelicula")
+	public ResponseEntity<?> createPelicula(RequestEntity<Pelicula> reqPelicula) {
 		
-		if (reqEmpleado.getBody() == null) {
-			return new ResponseEntity<ErrorRest>(new ErrorRest("Formato de petición incorrecto. Debe enviar los datos del empleado a dar de alta"),
+		if (reqPelicula.getBody() == null) {
+			return new ResponseEntity<ErrorRest>(new ErrorRest("Formato de petición incorrecto. Debe enviar los datos de la pelicula a dar de alta"),
 					HttpStatus.BAD_REQUEST);
 		}
 		
-		Pelicula pelicula = reqEmpleado.getBody();
+		Pelicula pelicula = reqPelicula.getBody();
 
 		if (peliculaRepository.findOne(pelicula.getId()) != null) {
-			return new ResponseEntity<ErrorRest>(new ErrorRest("El empleado con ID " + pelicula.getId() + " ya existe"),
+			return new ResponseEntity<ErrorRest>(new ErrorRest("La pelicula con ID " + pelicula.getId() + " ya existe"),
 					HttpStatus.CONFLICT);
 		} else {
 			return new ResponseEntity<Pelicula>(peliculaRepository.save(pelicula), HttpStatus.CREATED);
 		}
 	}
 
-	@PutMapping("/empleado/{id}")
-	public ResponseEntity<?> updateEmpleado(@PathVariable Long id, RequestEntity<Pelicula> reqEmpleado) {
+	@PutMapping("/pelicula/{id}")
+	public ResponseEntity<?> updatePelicula(@PathVariable Long id, RequestEntity<Pelicula> reqPelicula) {
 		
-		if (reqEmpleado.getBody() == null) {
-			return new ResponseEntity<ErrorRest>(new ErrorRest("Formato de petición incorrecto. Debe enviar los datos del empleado a modificar"),
+		if (reqPelicula.getBody() == null) {
+			return new ResponseEntity<ErrorRest>(new ErrorRest("Formato de petición incorrecto. Debe enviar los datos de la pelicula a modificar"),
 					HttpStatus.BAD_REQUEST);
 		}
 		
 		if (peliculaRepository.findOne(id) != null) {
-			Pelicula empleado = reqEmpleado.getBody();
-			Pelicula aActualizar = new Pelicula(id, empleado.getNombre(), empleado.getFechaEstreno());
+			Pelicula pelicula = reqPelicula.getBody();
+			Pelicula aActualizar = new Pelicula(id, pelicula.getNombre(), pelicula.getFechaEstreno());
 			return new ResponseEntity<Pelicula>(peliculaRepository.save(aActualizar), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<ErrorRest>(new ErrorRest("La pelicula a modificar no existe"),
@@ -84,30 +84,30 @@ public class PeliculaController {
 	}
 
 	@DeleteMapping("/pelicula/{id}")
-	public ResponseEntity<?> deleteEmpleado(@PathVariable Long id) {
+	public ResponseEntity<?> deletePelicula(@PathVariable Long id) {
 		
 		Pelicula aBorrar = peliculaRepository.findOne(id);
 		if (aBorrar != null) {
 			peliculaRepository.delete(aBorrar);
 			return new ResponseEntity<Pelicula>(aBorrar, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<ErrorRest>(new ErrorRest("la pelicula a borrar no existe"),
+			return new ResponseEntity<ErrorRest>(new ErrorRest("La pelicula a borrar no existe"),
 					HttpStatus.NOT_FOUND);
 		}
 		
 	}
 
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	private class EmpleadoNotFoundException extends RuntimeException {
+	private class PeliculaNotFoundException extends RuntimeException {
 
 		private static final long serialVersionUID = 7295910574475009536L;
 
-		public EmpleadoNotFoundException() {
-			super("No existe ningún empleado");
+		public PeliculaNotFoundException() {
+			super("No existe ninguna película");
 		}
 
-		public EmpleadoNotFoundException(Long id) {
-			super(String.format("No existe ningún empleado con el ID = %d", id));
+		public PeliculaNotFoundException(Long id) {
+			super(String.format("No existe ninguna película con el ID = %d", id));
 		}
 
 	}
