@@ -85,7 +85,6 @@ public class PeliculaController {
 
 	@DeleteMapping("/pelicula/{id}")
 	public ResponseEntity<?> deletePelicula(@PathVariable Long id) {
-		
 		Pelicula aBorrar = peliculaRepository.findOne(id);
 		if (aBorrar != null) {
 			peliculaRepository.delete(aBorrar);

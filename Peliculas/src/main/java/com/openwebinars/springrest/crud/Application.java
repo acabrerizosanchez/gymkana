@@ -12,9 +12,6 @@ import org.springframework.context.annotation.Bean;
 import com.openwebinars.springrest.crud.model.Pelicula;
 import com.openwebinars.springrest.crud.repo.PeliculaRepository;
 
-import com.openwebinars.springrest.crud.model.Usuario;
-import com.openwebinars.springrest.crud.repo.UsuarioRepository;
-
 @SpringBootApplication
 public class Application {
 
@@ -53,6 +50,7 @@ public class Application {
 		
 	}
 	
+
 	/*@Bean
 	CommandLineRunner init(UsuarioRepository usuarioRepository) {
 		
