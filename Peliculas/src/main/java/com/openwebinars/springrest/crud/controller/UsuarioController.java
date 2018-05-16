@@ -74,7 +74,7 @@ public class UsuarioController {
 		
 		if (usuarioRepository.findOne(id) != null) {
 			Usuario usuario = reqUsuario.getBody();
-			Usuario aActualizar = new Usuario(id, usuario.getNombre(), usuario.getClave());
+			Usuario aActualizar = new Usuario(id, usuario.getName(), usuario.getSurname(), usuario.getBirthDate());
 			return new ResponseEntity<Usuario>(usuarioRepository.save(aActualizar), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<ErrorRest>(new ErrorRest("El usuario a modificar no existe"),

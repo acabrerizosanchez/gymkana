@@ -15,23 +15,54 @@ public class Pelicula {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@Column
-	private String nombre;
+	private String title;
 	@Column
-	private Date fechaEstreno;
-	
+	private Date date;
+	@Column
+	private boolean isAdult;
+	@Column
+	private String[] genres;
 	
 	public Pelicula() {}
 
 
-	public Pelicula(long id, String nombre, Date fechaEstreno) {
+	public Pelicula(long id, String title, Date date, boolean isAdult, String[] genres) {
 		this.id = id;
-		this.nombre = nombre;
-		this.fechaEstreno = fechaEstreno;
+		this.title = title;
+		this.date = date;
+		this.isAdult = isAdult;
+		this.genres = genres;
 	}
 	
-	public Pelicula(String nombre, Date fechaEstreno) {
-		this.nombre = nombre;
-		this.fechaEstreno = fechaEstreno;
+	public Pelicula(String title, Date date, boolean isAdult, String[] genres) {
+		this.title = title;
+		this.date = date;
+		this.genres = genres;
+	}
+
+
+	public boolean isAdult() {
+		return isAdult;
+	}
+
+
+	public void setAdult(boolean isAdult) {
+		this.isAdult = isAdult;
+	}
+
+
+	public String[] getGenres() {
+		return genres;
+	}
+
+
+	public void setGenres(String[] genres) {
+		this.genres = genres;
+	}
+
+
+	public String getTitle() {
+		return title;
 	}
 
 
@@ -45,23 +76,23 @@ public class Pelicula {
 	}
 
 
-	public String getNombre() {
-		return nombre;
+	public String geTitle() {
+		return title;
 	}
 
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 
-	public Date getFechaEstreno() {
-		return fechaEstreno;
+	public Date getDate() {
+		return date;
 	}
 
 
-	public void setFechaEstreno(Date fechaEstreno) {
-		this.fechaEstreno = fechaEstreno;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 
@@ -69,9 +100,9 @@ public class Pelicula {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((fechaEstreno == null) ? 0 : fechaEstreno.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
 
@@ -85,17 +116,17 @@ public class Pelicula {
 		if (getClass() != obj.getClass())
 			return false;
 		Pelicula other = (Pelicula) obj;
-		if (fechaEstreno == null) {
-			if (other.fechaEstreno != null)
+		if (date == null) {
+			if (other.date != null)
 				return false;
-		} else if (!fechaEstreno.equals(other.fechaEstreno))
+		} else if (!date.equals(other.date))
 			return false;
 		if (id != other.id)
 			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
+		if (title == null) {
+			if (other.title != null)
 				return false;
-		} else if (!nombre.equals(other.nombre))
+		} else if (!title.equals(other.title))
 			return false;
 		return true;
 	}

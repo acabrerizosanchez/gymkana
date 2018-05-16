@@ -50,7 +50,7 @@ public class PeliculaController {
 	public ResponseEntity<?> createPelicula(RequestEntity<Pelicula> reqPelicula) {
 		
 		if (reqPelicula.getBody() == null) {
-			return new ResponseEntity<ErrorRest>(new ErrorRest("Formato de petición incorrecto. Debe enviar los datos de la pelicula a dar de alta"),
+			return new ResponseEntity<ErrorRest>(new ErrorRest("Formato de petición incorrecto. Debe enviar los datos de la pelicula a dar de alta."),
 					HttpStatus.BAD_REQUEST);
 		}
 		
@@ -74,7 +74,7 @@ public class PeliculaController {
 		
 		if (peliculaRepository.findOne(id) != null) {
 			Pelicula pelicula = reqPelicula.getBody();
-			Pelicula aActualizar = new Pelicula(id, pelicula.getNombre(), pelicula.getFechaEstreno());
+			Pelicula aActualizar = new Pelicula(id, pelicula.getTitle(), pelicula.getDate(), pelicula.isAdult(), pelicula.getGenres());
 			return new ResponseEntity<Pelicula>(peliculaRepository.save(aActualizar), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<ErrorRest>(new ErrorRest("La pelicula a modificar no existe"),

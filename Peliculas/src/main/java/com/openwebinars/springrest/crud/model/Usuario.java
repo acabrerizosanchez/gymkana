@@ -1,5 +1,7 @@
 package com.openwebinars.springrest.crud.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,23 +15,37 @@ public class Usuario {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@Column
-	private String nombre;
+	private String name;
 	@Column
-	private String clave;
+	private String surname;
+	@Column
+	private Date birthDate;
 	
 	
 	public Usuario() {}
 
 
-	public Usuario(long id, String nombre, String clave) {
+	public Usuario(long id, String name, String surname, Date birthDate) {
 		this.id = id;
-		this.nombre = nombre;
-		this.clave = clave;
+		this.name = name;
+		this.surname = surname;
+		this.birthDate = birthDate;
 	}
 	
-	public Usuario(String nombre, String clave) {
-		this.nombre = nombre;
-		this.clave = clave;
+	public Usuario(String name, String surname, Date birthDate) {
+		this.name = name;
+		this.surname = surname;
+		this.birthDate = birthDate;
+	}
+
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 
@@ -43,33 +59,15 @@ public class Usuario {
 	}
 
 
-	public String getNombre() {
-		return nombre;
-	}
-
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	public String getClave() {
-		return clave;
-	}
-
-
-	public void setClave(String clave) {
-		this.clave = clave;
-	}
-
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((clave == null) ? 0 : clave.hashCode());
+		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		return result;
 	}
 
@@ -83,19 +81,44 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (clave == null) {
-			if (other.clave != null)
+		if (birthDate == null) {
+			if (other.birthDate != null)
 				return false;
-		} else if (!clave.equals(other.clave))
+		} else if (!birthDate.equals(other.birthDate))
 			return false;
 		if (id != other.id)
 			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!nombre.equals(other.nombre))
+		} else if (!name.equals(other.name))
+			return false;
+		if (surname == null) {
+			if (other.surname != null)
+				return false;
+		} else if (!surname.equals(other.surname))
 			return false;
 		return true;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getSurname() {
+		return surname;
+	}
+
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 	
 	
