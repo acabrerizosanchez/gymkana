@@ -47,17 +47,17 @@ public class PuntuacionController {
 			throw new PuntuacionNotFoundException(id);
 	}
 	
-	@GetMapping("/usuario/{id_usuario}/pelicula/{id_pelicula}")
-	public Puntuacion getPuntuacionUsuarioPelicula(@PathVariable Long id_usuario, @PathVariable Long id_pelicula) {
-		Puntuacion result = puntuacionRepository.findByUserIdAndMovieId(id_usuario, id_pelicula);
+	@GetMapping("/usuario/{idUsuario}/pelicula/{id_pelicula}")
+	public Puntuacion getPuntuacionUsuarioPelicula(@PathVariable Long idUsuario, @PathVariable Long id_pelicula) {
+		Puntuacion result = puntuacionRepository.findByUserIdAndMovieId(idUsuario, id_pelicula);
 		if (result != null)
 			return result;
 		else
 			throw new PuntuacionNotFoundException();
 	}
 		
-	@PostMapping("/usuario/{id_usuario}/pelicula/{id_pelicula}")
-	public ResponseEntity<?> createPuntuacion(@PathVariable Long id_usuario, @PathVariable Long id_pelicula, RequestEntity<Puntuacion> reqPuntuacion) {
+	@PostMapping("/usuario/{idUsuario}/pelicula/{id_pelicula}")
+	public ResponseEntity<?> createPuntuacion(@PathVariable Long idUsuario, @PathVariable Long id_pelicula, RequestEntity<Puntuacion> reqPuntuacion) {
 		
 		if (reqPuntuacion.getBody() == null) {
 			return new ResponseEntity<ErrorRest>(new ErrorRest("Formato de petición incorrecto. Debe enviar los datos de la puntuacion a dar de alta."),
@@ -66,7 +66,7 @@ public class PuntuacionController {
 		
 		Puntuacion puntuacion = reqPuntuacion.getBody();
 
-		if (puntuacionRepository.findByUserIdAndMovieId(id_usuario, id_pelicula) != null) {
+		if (puntuacionRepository.findByUserIdAndMovieId(idUsuario, id_pelicula) != null) {
 			return new ResponseEntity<ErrorRest>(new ErrorRest("La puntuacion con ID " + puntuacion.getId() + " ya existe"),
 					HttpStatus.CONFLICT);
 		} else {

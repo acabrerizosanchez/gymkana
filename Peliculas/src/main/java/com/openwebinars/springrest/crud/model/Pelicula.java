@@ -19,14 +19,14 @@ public class Pelicula {
 	@Column
 	private Date date;
 	@Column
-	private boolean isAdult;
+	private Boolean isAdult;
 	@Column
 	private String[] genres;
 	
 	public Pelicula() {}
 
 
-	public Pelicula(long id, String title, Date date, boolean isAdult, String[] genres) {
+	public Pelicula(long id, String title, Date date, Boolean isAdult, String[] genres) {
 		this.id = id;
 		this.title = title;
 		this.date = date;
@@ -34,19 +34,19 @@ public class Pelicula {
 		this.genres = genres;
 	}
 	
-	public Pelicula(String title, Date date, boolean isAdult, String[] genres) {
+	public Pelicula(String title, Date date, Boolean isAdult, String[] genres) {
 		this.title = title;
 		this.date = date;
 		this.genres = genres;
 	}
 
 
-	public boolean isAdult() {
+	public Boolean isAdult() {
 		return isAdult;
 	}
 
 
-	public void setAdult(boolean isAdult) {
+	public void setAdult(Boolean isAdult) {
 		this.isAdult = isAdult;
 	}
 

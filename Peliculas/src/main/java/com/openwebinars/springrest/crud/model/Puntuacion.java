@@ -14,7 +14,6 @@ public class Puntuacion {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	
 	@Column
 	private long userId;
 	@Column
