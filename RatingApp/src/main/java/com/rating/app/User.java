@@ -11,16 +11,16 @@ public class User {
   
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
-  private long id;
+  private Integer userId;
   private String name;
   private String surname;
   private Date birthDate;
   
-  public long getId() {
-    return id;
+  public Integer getUserId() {
+    return userId;
   }
-  public void setId(long id) {
-    this.id = id;
+  public void setUserId(Integer userId) {
+    this.userId = userId;
   }
   public String getName() {
     return name;
@@ -41,6 +41,7 @@ public class User {
     this.birthDate = birthDate;
   }
 
+  
 
 
 }

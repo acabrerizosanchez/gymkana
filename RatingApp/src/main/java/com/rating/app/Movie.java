@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
-public class Film {
+public class Movie {
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
-  private long id;
+  private Integer movieId;
   private String title;
   private Boolean isAdult;
   private Date date;
   private ArrayList<String> genres;
   
-  public void setId(long id) {
-    this.id = id;
+  public void setMovieId(Integer movieId) {
+    this.movieId = movieId;
   }
   public void setTitle(String title) {
     this.title = title;
@@ -31,10 +31,11 @@ public class Film {
     this.date = date;
   }
   public void setGenres(ArrayList<String> genres) {
-    this.genres = genres;
+    Integer min = Math.min(3, genres.size());
+    this.genres = (ArrayList<String>) genres.subList(0, min);
   }
-  public long getId() {
-    return id;
+  public Integer getMovieId() {
+    return movieId;
   }
   public String getTitle() {
     return title;

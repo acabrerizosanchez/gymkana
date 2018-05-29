@@ -11,27 +11,28 @@ public class Rating {
   
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
-  private long id;
-  private String userId;
-  private String movieId;
+  private Integer ratingId;
+  private Integer userId;
+  private Integer movieId;
   private Integer score;
   private Date date;
-  public long getId() {
-    return id;
+  
+  public Integer getRatingId() {
+    return ratingId;
   }
-  public void setId(long id) {
-    this.id = id;
+  public void setRatingId(Integer ratingId) {
+    this.ratingId = ratingId;
   }
-  public String getUserId() {
+  public Integer getUserId() {
     return userId;
   }
-  public void setUserId(String userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
-  public String getMovieId() {
+  public Integer getMovieId() {
     return movieId;
   }
-  public void setMovieId(String movieId) {
+  public void setMovieId(Integer movieId) {
     this.movieId = movieId;
   }
   public Integer getScore() {
