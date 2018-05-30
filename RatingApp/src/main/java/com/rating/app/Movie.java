@@ -31,8 +31,7 @@ public class Movie {
     this.date = date;
   }
   public void setGenres(ArrayList<String> genres) {
-    Integer min = Math.min(3, genres.size());
-    this.genres = (ArrayList<String>) genres.subList(0, min);
+    this.genres = genres;
   }
   public Integer getMovieId() {
     return movieId;
